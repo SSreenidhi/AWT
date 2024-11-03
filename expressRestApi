@@ -60,3 +60,37 @@ app.listen(port, function() {
     console.log("server Started ----");
     console.log("Server started on port :" + port);
 });
+------------------------------------------------------------------------------------------------------------------------------------
+students.js
+-----------
+{
+  "students": [
+    {
+      "name": "Alice Johnson",
+      "roll_number": "101"
+    },
+    {
+      "name": "Bob Smith",
+      "roll_number": "102"
+    },
+    {
+      "name": "Charlie Brown",
+      "roll_number": "103"
+    },
+    {
+      "name": "Daisy Miller",
+      "roll_number": "104"
+    },
+    {
+      "name": "Ethan White",
+      "roll_number": "105"
+    }
+  ]
+}
+------------------------------------------------------------------------------------------------------------------------
+output
+------
+get: http://localhost:8080
+post:http://localhost:8080/list
+post:http://localhost:8080/
+put& Delete :http://localhost:8080     (body)
