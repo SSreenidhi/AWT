@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Management System</title>
+  </head>
+  <body>
+    Enter Student Name : <input type="text" name="name" id="name" />
+    <br /><br />
+    Enter Student Roll Number : <input type="text" name="roll" id="roll" />
+    <br /><br />
+    Enter Student Branch : <input type="text" name="branch" id="br" />
+    <br /><br />
+    Enter Student Year : <input type="text" name="year" id="yr" /> <br /><br />
+    Enter Student CGPA : <input type="text" name="cgpa" id="cg" /> <br /><br />
+
+    <input type="button" name="insert" value="INSERT" id="b1" />
+    <input type="button" name="delete" value="DELETE" id="b2" />
+    <input type="button" name="update" value="UPDATE" id="b3" />
+    <input type="button" name="display" value="DISPLAY" id="b4" />
+    <h2 id="d"></h2>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+      import {
+        getDatabase,
+        set,
+        ref,
+        update,
+        remove,
+        get,
+        child,
+      } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyD1_TqW7QNJH1cYtgjC-Y3CUoWHIvlB27M",
+        authDomain: "student-management-syste-d851d.firebaseapp.com",
+        projectId: "student-management-syste-d851d",
+        storageBucket: "student-management-syste-d851d.appspot.com",
+        messagingSenderId: "301058343493",
+        appId: "1:301058343493:web:be589cc41aa05def01d92c",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      const dbref = getDatabase(app);
+      document.getElementById("b1").addEventListener("click", insertData);
+      //document.getElementById("b2").addEventListener("click", deleteData);
+      //document.getElementById("b3").addEventListener("click", updateData);
+      //document.getElementById("b4").addEventListener("click", displayData);
+      function insertData() {
+        var n = document.getElementById("name").value;
+        var r = document.getElementById("roll").value;
+        var b = document.getElementById("br").value;
+        var y = document.getElementById("yr").value;
+        var c = document.getElementById("cg").value;
+        var ob = {
+          name: n,
+          branch: b,
+          year: y,
+          cgpa: c,
+        };
+        set(ref(dbref, "student/" + r), ob);
+        alert("Student Data Inserted Sucessfully");
+      }
+      function deleteData()
+      {
+        var r=document.getElement("roll").value;
+        if(r==" "){
+          alert("please enter roll number");
+        }
+        else{
+          remove(ref(dbref,"student/"+r))
+          alert("student Data Deleted Successfully");
+        }
+      }
+      function updateData()
+      { var n = document.getElementById("name").value;
+        var b = document.getElementById("br").value;
+        var y = document.getElementById("yr").value;
+        var c = document.getElementById("cg").value;
+        var ob = {
+          name: n,
+          branch: b,
+          year: y,
+          cgpa: c,
+        };
+        set(ref(dbref, "student/" + r), ob);
+        alert("Student Data updated Sucessfully");
+      }
+      function displayData()
+      { 
+        var r=document.getElement("roll").value;
+        if(r==" "){
+          alert("please enter roll number");
+      } else{
+        get(child(ref(dbref),"student/"+r));
+        then(function(data)
+        {
+          if(data.exists())
+          {
+            var ob=data.val();
+            document.getElementById("d").innerHTML="Roll Number="+r+"<br>"+"Nme="+ob.name+"<br>"+"Branch="+ob.branch+"<br>"+"year="+ob.year+"<br>"+"cgpa="+ob.cgpa;
+          }
+          else{
+            alert("No Data Available");
+          }
+        });
+      }
+    }
+    </script>
+  </body>
+</html>
