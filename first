@@ -1,1 +1,12 @@
-my first program in git
+git clone https://github.com/username/AWT.git
+cd AWT
+touch internal
+git add internal
+git commit -m "Initial commit"
+git push origin main
+
+
+
+  git config --global user.email "sreenidhi2704@gmail.com"
+  git config --global user.name "Nidhi"
+
